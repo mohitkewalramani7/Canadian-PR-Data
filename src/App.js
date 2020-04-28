@@ -1,8 +1,8 @@
 import React from 'react';
 
 import './App.css';
-import SectionA from './SectionA'
-import SectionB from './SectionB'
+import SectionA from './Sections/SectionA'
+import SectionB from './Sections/SectionB'
 
 function App() {
   return (
