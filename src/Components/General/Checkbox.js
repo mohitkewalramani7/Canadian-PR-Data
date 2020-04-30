@@ -12,7 +12,7 @@ export default class FormCheckbox extends React.Component {
           />
         }
         label={this.props.title}
-        style={{marginBottom: '20px'}}
+        style={{width: '100%', marginBottom: '20px'}}
       />
     )
   }
