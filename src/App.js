@@ -4,6 +4,7 @@ import './App.css';
 import SectionA from './Components/SectionA/SectionA'
 import SectionB from './Components/SectionB/SectionB'
 import SectionC from './Components/SectionC/SectionC'
+import SectionD from "./Components/SectionD/SectionD";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <SectionA/>
         <SectionB/>
         <SectionC/>
+        <SectionD/>
       </div>
       <div id="entryChance">
         <h5>Scores and chances</h5>

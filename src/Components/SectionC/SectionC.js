@@ -1,12 +1,11 @@
 import React from "react";
-import Checkbox from "@material-ui/core/Checkbox";
 import Education from "./Education"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ForeignWorkExperience from "./ForeignWorkExperience";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormCheckbox from "../General/Checkbox";
 
 export default class SectionC extends React.Component {
   render() {
@@ -36,18 +35,7 @@ export default class SectionC extends React.Component {
             <h4>Certificate of qualification (trade occupations) –
               With good official language proficiency (Canadian
               Language Benchmark Level [CLB] 5 or higher)	</h4>
-            <div>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    name="With a certificate of qualification"
-                    color="primary"
-                  />
-                }
-                label="With a certificate of qualification"
-                style={{marginBottom: '20px'}}
-              />
-            </div>
+            <FormCheckbox title="With a certificate of qualification"/>
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
