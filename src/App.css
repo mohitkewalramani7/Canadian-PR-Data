@@ -29,3 +29,7 @@
 .inputFields {
   width: 100%;
 }
+
+#dropdownOptionWrap {
+  white-space: normal;
+}

@@ -1,8 +1,9 @@
 import React from 'react';
 
 import './App.css';
-import SectionA from './Sections/SectionA'
-import SectionB from './Sections/SectionB'
+import SectionA from './Components/SectionA/SectionA'
+import SectionB from './Components/SectionB/SectionB'
+import SectionC from './Components/SectionC/SectionC'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <div id="currentScore">
         <SectionA/>
         <SectionB/>
+        <SectionC/>
       </div>
       <div id="entryChance">
         <h5>Scores and chances</h5>

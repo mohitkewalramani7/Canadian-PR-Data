@@ -6,9 +6,9 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import CanadianWorkExperience from "../Components/CanadianWorkExperience";
-import Education from "../Components/Education";
-import SubsidiaryLanguage from "../Components/SubsidiaryLanguage";
+import CanadianWorkExperience from "../General/CanadianWorkExperience";
+import Education from "../General/Education";
+import SubsidiaryLanguage from "../General/SubsidiaryLanguage";
 
 export default class SectionB extends React.Component {
   constructor(props) {

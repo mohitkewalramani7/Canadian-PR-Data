@@ -9,9 +9,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 
-import Education from "../Components/Education"
-import SubsidiaryLanguage from "../Components/SubsidiaryLanguage";
-import CanadianWorkExperience from "../Components/CanadianWorkExperience";
+import Education from "../General/Education"
+import SubsidiaryLanguage from "../General/SubsidiaryLanguage";
+import CanadianWorkExperience from "../General/CanadianWorkExperience";
 
 export default class SectionA extends React.Component {
   render() {
