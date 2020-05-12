@@ -3,17 +3,22 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
 
 import Education from "../General/Education"
 import SubsidiaryLanguage from "../General/SubsidiaryLanguage";
 import CanadianWorkExperience from "../General/CanadianWorkExperience";
+import FirstLanguage from "./FirstLanguage";
+import Age from "./Age";
 
 export default class SectionA extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      firstLanguage: null
+    }
+  }
+
   render() {
     return (
       <ExpansionPanel>
@@ -26,39 +31,18 @@ export default class SectionA extends React.Component {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <div style={{width: '100%'}}>
-            <div className="inputFieldDivs">
-              <TextField
-                className="inputFields"
-                id="age"
-                label="Age"
-                variant="outlined" />
-            </div>
 
-            <Education/>
+            <Age updatePoints={this.props.updatePoints}/>
 
-            <div className="inputFieldDivs">
-              <FormControl variant="outlined" className="inputFields">
-                <InputLabel>First Official Language</InputLabel>
-                <Select
-                  // value={state.age}
-                  // onChange={handleChange}
-                  label="First Official Language"
-                >
-                  <MenuItem value="" />
-                  <MenuItem value={1}>Less than CLB 4</MenuItem>
-                  <MenuItem value={2}>CLB 4 or 5</MenuItem>
-                  <MenuItem value={3}>CLB 6</MenuItem>
-                  <MenuItem value={4}>CLB 7</MenuItem>
-                  <MenuItem value={5}>CLB 8</MenuItem>
-                  <MenuItem value={6}>CLB 9</MenuItem>
-                  <MenuItem value={7}>CLB 10 or more</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
+            <Education updatePoints={this.props.updatePoints}/>
 
-            <SubsidiaryLanguage title="Second Official Language"/>
+            <FirstLanguage updatePoints={this.props.updatePoints}/>
 
-            <CanadianWorkExperience/>
+            <SubsidiaryLanguage
+              title="Second Official Language"
+              updatePoints={this.props.updatePoints}/>
+
+            <CanadianWorkExperience updatePoints={this.props.updatePoints}/>
 
           </div>
         </ExpansionPanelDetails>

@@ -9,6 +9,7 @@ export default class FormCheckbox extends React.Component {
         control={
           <Checkbox
             color="primary"
+            onChange={this.props.onChange}
           />
         }
         label={this.props.title}
