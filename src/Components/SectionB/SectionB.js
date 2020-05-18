@@ -8,27 +8,21 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import CanadianWorkExperience from "../General/CanadianWorkExperience";
 import Education from "../General/Education";
+import Main from "../Main";
+import PointsClass from "../PointsClass";
 import SubsidiaryLanguage from "../General/SubsidiaryLanguage";
 
-export default class SectionB extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      spouseApplicable: false
-    };
-  }
+export default class SectionB extends PointsClass {
 
   showSpouseDetails(){
-    if (this.state.spouseApplicable){
+    if (Main.PARTNERED){
       return 'inline';
     }
     return 'none';
   }
 
   handleApplicableChange(){
-    this.setState({spouseApplicable:
-        !this.state.spouseApplicable
-    });
+    this.handlePartneredChange();
   }
 
   render() {
@@ -55,9 +49,16 @@ export default class SectionB extends React.Component {
                 style={{marginBottom: '20px'}}
               />
               <div id="spouseDetails" style={{display: this.showSpouseDetails()}}>
-                <Education/>
-                <SubsidiaryLanguage title="First Official Language"/>
-                <CanadianWorkExperience/>
+                <Education
+                  target='spouse'
+                  updatePoints={this.props.updatePoints}/>
+                <SubsidiaryLanguage
+                  target='spouse'
+                  title="First Official Language"
+                  updatePoints={this.props.updatePoints}/>
+                <CanadianWorkExperience
+                  target='spouse'
+                  updatePoints={this.props.updatePoints}/>
               </div>
             </div>
           </ExpansionPanelDetails>

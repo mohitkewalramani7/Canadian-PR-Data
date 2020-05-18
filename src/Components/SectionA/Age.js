@@ -16,12 +16,13 @@ export default class Age extends PointsClass {
             const age = e.target.value;
             const re = /^[0-9]+$/;
             if (age === '' || re.test(age)){
-              let oldAge = this.state.age;
+              let oldAge = PointsClass.SECTION_A_FIELDS[PointsClass.AGE_KEY];
               let newAgeValue = this.returnAgeValue(age);
+              this.setAgeValue(newAgeValue);
               this.handleAgeChange(oldAge, newAgeValue);
             }
           }}
-          value={this.state.age}
+          value={PointsClass.SECTION_A_FIELDS[PointsClass.AGE_KEY]}
         />
       </div>
     )
@@ -29,12 +30,12 @@ export default class Age extends PointsClass {
 
   returnAgeValue(ageString){
     if (ageString === ''){
-      this.setState({age: 0});
+      this.setAgeValue(0);
       return 0;
     }
     else{
       let ageValue = parseInt(ageString);
-      this.setState({age: ageValue});
+      this.setAgeValue(ageValue);
       return ageValue;
     }
   }

@@ -13,8 +13,7 @@ export default class Education extends React.Component {
           <FormControl variant="outlined" className="inputFields">
             <InputLabel>Select One</InputLabel>
             <Select
-              // value={state.age}
-              // onChange={handleChange}
+              value=''
               label="Education"
             >
               <MenuItem id="dropdownOptionWrap" value="" />

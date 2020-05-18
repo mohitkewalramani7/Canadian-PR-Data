@@ -14,7 +14,12 @@ const CLB_9_OR_MORE = "CLB 9 or more";
 export default class SubsidiaryLanguage extends PointsClass {
 
   handleSubsidiaryLanguageChange(event, child){
-    this.handleChange(event, child, "subsidiaryLanguageScore")
+    super.handleSectionABChange(
+      child,
+      this.props.target,
+      PointsClass.SUBSIDIARY_LANGUAGE_KEY,
+      PointsClass.SPOUSE_SUBSIDIARY_LANGUAGE_KEY
+    );
   }
 
   render() {
@@ -26,13 +31,22 @@ export default class SubsidiaryLanguage extends PointsClass {
             onChange={this.handleSubsidiaryLanguageChange.bind(this)}
             label={this.props.title}
           >
-            <MenuItem id="second_lang_clb_4_or_less"
+            <MenuItem id={this.props.target === 'principal' ?
+              'second_lang_clb_4_or_less' :
+              'spouse_first_lang_clb_4_or_less'}
                       value={0}>{CLB_4_OR_LESS}</MenuItem>
-            <MenuItem id="second_lang_clb_5_6"
+            <MenuItem id={this.props.target === 'principal' ?
+              'second_lang_clb_5_6' :
+              'spouse_first_lang_clb_5_6'}
                       value={1}>{CLB_5_OR_6}</MenuItem>
-            <MenuItem id="second_lang_clb_7_8"
+            <MenuItem id={this.props.target === 'principal' ?
+              'second_lang_clb_7_8' :
+              'spouse_first_lang_clb_7_8'}
                       value={2}>{CLB_7_OR_8}</MenuItem>
-            <MenuItem id="second_lang_clb_9_or_more"
+            <MenuItem id={this.props.target === 'principal' ?
+              'second_lang_clb_9_or_more' :
+              'spouse_first_lang_clb_9_or_more'
+            }
                       value={3}>{CLB_9_OR_MORE}</MenuItem>
           </Select>
         </FormControl>

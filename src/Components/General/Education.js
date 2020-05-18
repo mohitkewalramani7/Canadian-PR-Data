@@ -20,7 +20,12 @@ const DOCTORAL_LEVEL = "Doctoral level university degree (Ph.D.)";
 export default class Education extends PointsClass {
 
   handleEducationChange(event, child){
-    super.handleChange(event, child, "educationLevel")
+    super.handleSectionABChange(
+      child,
+      this.props.target,
+      PointsClass.EDUCATION_LEVEL_KEY,
+      PointsClass.SPOUSE_EDUCATION_LEVEL_KEY
+    );
   }
 
   render() {
@@ -33,39 +38,67 @@ export default class Education extends PointsClass {
               onChange={this.handleEducationChange.bind(this)}
               label="Education"
             >
-              <MenuItem id="less_than_secondary_school"
+              <MenuItem id={
+                this.props.target === 'principal' ?
+                  'less_than_secondary_school' :
+                  'spouse_less_than_secondary_school'
+              }
                         value={0}>{LESS_THAN_SECONDARY_SCHOOL}</MenuItem>
-              <MenuItem id="secondary_diploma"
+              <MenuItem id={
+                this.props.target === 'principal' ?
+                  'secondary_diploma' :
+                  'spouse_secondary_diploma'
+              }
                         value={1}>{SECONDARY_DIPLOMA}</MenuItem>
-              <MenuItem id="one_year_degree"
+              <MenuItem id={
+                this.props.target === 'principal' ?
+                  'one_year_degree' :
+                  'spouse_one_year_degree'
+              }
                         value={2}>
                 <Tooltip title="One-year degree, diploma or certificate from  a
                     university, college, trade or technical school, or other institute">
                   <div>{ONE_YEAR_DEGREE}</div>
                 </Tooltip>
               </MenuItem>
-              <MenuItem id="two_year_program"
+              <MenuItem id={
+                this.props.target === 'principal' ?
+                  'two_year_program' :
+                  'spouse_two_year_program'
+              }
                         value={3}>
                 <Tooltip title="Two-year program at a university, college,
                     trade or technical school, or other institute">
                   <div>{TWO_YEAR_PROGRAM}</div>
                 </Tooltip>
               </MenuItem>
-              <MenuItem id="bachelors_degree"
+              <MenuItem id={
+                this.props.target === 'principal' ?
+                  'bachelors_degree' :
+                  'spouse_bachelors_degree'
+              }
                         value={4}>
                 <Tooltip title="Bachelor's degree OR a three or more year program at
                     a university, college, trade or technical school, or other institute">
                   <div>{BACHELORS_DEGREE}</div>
                 </Tooltip>
               </MenuItem>
-              <MenuItem id="two_or_more_certificates"
+              <MenuItem id={
+                this.props.target === 'principal' ?
+                  'two_or_more_certificates' :
+                  'spouse_two_or_more_certificates'
+              }
                         value={5}>
                 <Tooltip title="Two or more certificates, diplomas, or degrees.
                     One must be for a program of three or more years	">
                   <div>{TWO_OR_MORE_CERTIFICATES}</div>
                 </Tooltip>
               </MenuItem>
-              <MenuItem id="masters_degree"
+              <MenuItem id={
+                this.props.target === 'principal' ?
+                  'masters_degree' :
+                  'spouse_masters_degree'
+              }
                         value={6}>
                 <Tooltip title="Master's degree, OR professional degree needed to
                       practice in a licensed profession (For “professional degree,” the
@@ -74,7 +107,11 @@ export default class Education extends PointsClass {
                   <div>{MASTERS_DEGREE}</div>
                 </Tooltip>
               </MenuItem>
-              <MenuItem id="doctoral_level"
+              <MenuItem id={
+                this.props.target === 'principal' ?
+                  'doctoral_level' :
+                  'spouse_doctoral_level'
+              }
                         value={7}>{DOCTORAL_LEVEL}</MenuItem>
             </Select>
             <FormHelperText>Hover for more details (where applicable)</FormHelperText>

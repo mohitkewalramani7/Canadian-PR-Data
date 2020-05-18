@@ -17,7 +17,7 @@ const CLB_10_OR_MORE = "CLB 10 or more";
 export default class FirstLanguage extends PointsClass {
 
   handleFirstLanguageChange(event, child){
-    super.handleChange(event, child, "firstLanguage");
+    super.handleSectionAChange(event, child, PointsClass.FIRST_LANGUAGE_KEY);
   }
 
   render() {

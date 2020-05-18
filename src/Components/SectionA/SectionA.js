@@ -4,20 +4,14 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 
-import Education from "../General/Education"
-import SubsidiaryLanguage from "../General/SubsidiaryLanguage";
-import CanadianWorkExperience from "../General/CanadianWorkExperience";
-import FirstLanguage from "./FirstLanguage";
 import Age from "./Age";
+import CanadianWorkExperience from "../General/CanadianWorkExperience";
+import Education from "../General/Education"
+import FirstLanguage from "./FirstLanguage";
+import PointsClass from "../PointsClass";
+import SubsidiaryLanguage from "../General/SubsidiaryLanguage";
 
-export default class SectionA extends React.Component {
-
-  constructor(props){
-    super(props);
-    this.state = {
-      firstLanguage: null
-    }
-  }
+export default class SectionA extends PointsClass {
 
   render() {
     return (
@@ -34,15 +28,20 @@ export default class SectionA extends React.Component {
 
             <Age updatePoints={this.props.updatePoints}/>
 
-            <Education updatePoints={this.props.updatePoints}/>
+            <Education
+              target='principal'
+              updatePoints={this.props.updatePoints}/>
 
             <FirstLanguage updatePoints={this.props.updatePoints}/>
 
             <SubsidiaryLanguage
               title="Second Official Language"
+              target='principal'
               updatePoints={this.props.updatePoints}/>
 
-            <CanadianWorkExperience updatePoints={this.props.updatePoints}/>
+            <CanadianWorkExperience
+              target='principal'
+              updatePoints={this.props.updatePoints}/>
 
           </div>
         </ExpansionPanelDetails>

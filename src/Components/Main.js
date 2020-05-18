@@ -9,8 +9,6 @@ export default class Main extends React.Component {
   static PARTNERED = false;
   static POINTS_JSON;
 
-  static PARTNERED_DEPENDENT_POINTS = {};
-
   constructor(props) {
     super(props);
     this.state = {
@@ -20,25 +18,22 @@ export default class Main extends React.Component {
 
   componentDidMount() {
     this.loadPointsList();
-    this.setPartnerDependentFields();
   }
 
   loadPointsList(){
     Main.POINTS_JSON = require('../points');
   }
 
-  setPartnerDependentFields(){
-    Main.PARTNERED_DEPENDENT_POINTS["AGE"] = null;
-    Main.PARTNERED_DEPENDENT_POINTS["EDUCATION_LEVEL"] = null;
-    Main.PARTNERED_DEPENDENT_POINTS["FIRST_LANGUAGE"] = null;
-    Main.PARTNERED_DEPENDENT_POINTS["SECOND_LANGUAGE"] = null;
-    Main.PARTNERED_DEPENDENT_POINTS["CANADIAN_WORK_EXP"] = null;
-  }
-
-  static isPartnered(){
+  static returnPartneredStatus(){
     if (Main.PARTNERED)
       return "partnered";
     return "single";
+  }
+
+  static returnOppositePartneredStatus(){
+    if (Main.PARTNERED)
+      return "single";
+    return "partnered";
   }
 
   updatePoints(pointsToAdd){
