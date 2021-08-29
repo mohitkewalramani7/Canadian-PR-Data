@@ -3,32 +3,8 @@ import TextField from "@material-ui/core/TextField";
 
 import PointsClass from "../PointsClass";
 
-export default class Age extends PointsClass {
-  render() {
-    return (
-      <div className="inputFieldDivs">
-        <TextField
-          className="inputFields"
-          id="age"
-          label="Age"
-          variant="outlined"
-          onChange={(e) => {
-            const age = e.target.value;
-            const re = /^[0-9]+$/;
-            if (age === '' || re.test(age)){
-              let oldAge = PointsClass.SECTION_A_FIELDS[PointsClass.AGE_KEY];
-              let newAgeValue = this.returnAgeValue(age);
-              this.setAgeValue(newAgeValue);
-              this.handleAgeChange(oldAge, newAgeValue);
-            }
-          }}
-          value={PointsClass.SECTION_A_FIELDS[PointsClass.AGE_KEY]}
-        />
-      </div>
-    )
-  }
-
-  returnAgeValue(ageString){
+function Age(props) {
+  const returnAgeValue = (ageString) => {
     if (ageString === ''){
       this.setAgeValue(0);
       return 0;
@@ -39,4 +15,28 @@ export default class Age extends PointsClass {
       return ageValue;
     }
   }
+
+  return (
+    <div className="inputFieldDivs">
+      <TextField
+        className="inputFields"
+        id="age"
+        label="Age"
+        variant="outlined"
+        onChange={(e) => {
+          const age = e.target.value;
+          const re = /^[0-9]+$/;
+          if (age === '' || re.test(age)){
+            let oldAge = PointsClass.SECTION_A_FIELDS[PointsClass.AGE_KEY];
+            let newAgeValue = returnAgeValue(age);
+            this.setAgeValue(newAgeValue);
+            this.handleAgeChange(oldAge, newAgeValue);
+          }
+        }}
+        value={PointsClass.SECTION_A_FIELDS[PointsClass.AGE_KEY]}
+      />
+    </div>
+  )
 }
+
+export default Age

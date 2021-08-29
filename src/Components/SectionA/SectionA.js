@@ -11,41 +11,41 @@ import FirstLanguage from "./FirstLanguage";
 import PointsClass from "../PointsClass";
 import SubsidiaryLanguage from "../General/SubsidiaryLanguage";
 
-export default class SectionA extends PointsClass {
+function SectionA(props) {
 
-  render() {
-    return (
-      <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <h4>A. Core / human capital factors</h4>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <div style={{width: '100%'}}>
+  return (
+    <ExpansionPanel>
+      <ExpansionPanelSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <h4>A. Core / human capital factors</h4>
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetails>
+        <div style={{width: '100%'}}>
 
-            <Age updatePoints={this.props.updatePoints}/>
+          <Age updatePoints={props.updatePoints}/>
 
-            <Education
-              target='principal'
-              updatePoints={this.props.updatePoints}/>
+          <Education
+            target='principal'
+            updatePoints={props.updatePoints}/>
 
-            <FirstLanguage updatePoints={this.props.updatePoints}/>
+          <FirstLanguage updatePoints={props.updatePoints}/>
 
-            <SubsidiaryLanguage
-              title="Second Official Language"
-              target='principal'
-              updatePoints={this.props.updatePoints}/>
+          <SubsidiaryLanguage
+            title="Second Official Language"
+            target='principal'
+            updatePoints={props.updatePoints}/>
 
-            <CanadianWorkExperience
-              target='principal'
-              updatePoints={this.props.updatePoints}/>
+          <CanadianWorkExperience
+            target='principal'
+            updatePoints={props.updatePoints}/>
 
-          </div>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    )
-  }
+        </div>
+      </ExpansionPanelDetails>
+    </ExpansionPanel>
+  )
 }
+
+export default SectionA

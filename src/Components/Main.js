@@ -1,63 +1,57 @@
+import React, { useState, useEffect } from "react";
+
 import SectionA from "./SectionA/SectionA";
 import SectionB from "./SectionB/SectionB";
 import SectionC from "./SectionC/SectionC";
 import SectionD from "./SectionD/SectionD";
-import React from "react";
 
-export default class Main extends React.Component {
+function Main(props) {
 
-  static PARTNERED = false;
-  static POINTS_JSON;
+  var PARTNERED = false;
+  var POINTS_JSON;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      totalPoints: 0,
-    }
+  const [totalPoints, setTotalPoints] = useState(0)
+
+  useEffect(() => {
+    loadPointsList()
+  })
+
+  const loadPointsList = () => {
+    POINTS_JSON = require('../points');
   }
 
-  componentDidMount() {
-    this.loadPointsList();
-  }
-
-  loadPointsList(){
-    Main.POINTS_JSON = require('../points');
-  }
-
-  static returnPartneredStatus(){
-    if (Main.PARTNERED)
+  const returnPartneredStatus = () => {
+    if (PARTNERED)
       return "partnered";
     return "single";
   }
 
-  static returnOppositePartneredStatus(){
-    if (Main.PARTNERED)
+  const returnOppositePartneredStatus = () => {
+    if (PARTNERED)
       return "single";
     return "partnered";
   }
 
-  updatePoints(pointsToAdd){
-    this.setState({
-      totalPoints: this.state.totalPoints + pointsToAdd
-    });
+  const updatePoints = (pointsToAdd) => {
+    setTotalPoints(totalPoints + pointsToAdd)
   }
 
-  render() {
-    return (
-      <div>
-        <div id="currentScore">
-          <SectionA updatePoints={(points) => this.updatePoints(points)}/>
-          <SectionB updatePoints={(points) => this.updatePoints(points)}/>
-          <SectionC/>
-          <SectionD updatePoints={(points) => this.updatePoints(points)}/>
-        </div>
-        <div id="entryChance">
-          <h3>Scores and chances</h3>
-          <div>
-            <h4>{`Current Score: ${this.state.totalPoints}`}</h4>
-          </div>
+  return (
+    <div>
+      <div id="currentScore">
+        <SectionA updatePoints={(points) => updatePoints(points)}/>
+        <SectionB updatePoints={(points) => updatePoints(points)}/>
+        <SectionC/>
+        <SectionD updatePoints={(points) => updatePoints(points)}/>
+      </div>
+      <div id="entryChance">
+        <h3>Scores and chances</h3>
+        <div>
+          <h4>{`Current Score: ${totalPoints}`}</h4>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default Main

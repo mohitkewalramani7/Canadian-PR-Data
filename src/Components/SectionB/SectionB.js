@@ -12,57 +12,57 @@ import Main from "../Main";
 import PointsClass from "../PointsClass";
 import SubsidiaryLanguage from "../General/SubsidiaryLanguage";
 
-export default class SectionB extends PointsClass {
+function SectionB(props) {
 
-  showSpouseDetails(){
+  const showSpouseDetails = () => {
     if (Main.PARTNERED){
       return 'inline';
     }
     return 'none';
   }
 
-  handleApplicableChange(){
+  const handleApplicableChange = () => {
     this.handlePartneredChange();
   }
 
-  render() {
-    return (
-        <ExpansionPanel>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <h4>B. Spouse or common-law partner factors (if applicable)</h4>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <div style={{width: '100%'}}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    name="applicable"
-                    color="primary"
-                    onChange={() => this.handleApplicableChange()}
-                  />
-                }
-                label="Is Applicable?"
-                style={{marginBottom: '20px'}}
-              />
-              <div id="spouseDetails" style={{display: this.showSpouseDetails()}}>
-                <Education
-                  target='spouse'
-                  updatePoints={this.props.updatePoints}/>
-                <SubsidiaryLanguage
-                  target='spouse'
-                  title="First Official Language"
-                  updatePoints={this.props.updatePoints}/>
-                <CanadianWorkExperience
-                  target='spouse'
-                  updatePoints={this.props.updatePoints}/>
-              </div>
+  return (
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <h4>B. Spouse or common-law partner factors (if applicable)</h4>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <div style={{width: '100%'}}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="applicable"
+                  color="primary"
+                  onChange={() => handleApplicableChange()}
+                />
+              }
+              label="Is Applicable?"
+              style={{marginBottom: '20px'}}
+            />
+            <div id="spouseDetails" style={{display: showSpouseDetails()}}>
+              <Education
+                target='spouse'
+                updatePoints={props.updatePoints}/>
+              <SubsidiaryLanguage
+                target='spouse'
+                title="First Official Language"
+                updatePoints={props.updatePoints}/>
+              <CanadianWorkExperience
+                target='spouse'
+                updatePoints={props.updatePoints}/>
             </div>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-    )
-  }
+          </div>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+  )
 }
+
+export default SectionB
