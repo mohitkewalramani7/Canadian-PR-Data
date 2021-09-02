@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
-import PointsClass from "../PointsClass";
+import { incrementByAmount } from '../../Features/countUpdate'
+const pointsJson = require('../../points.json')
 
 const NONE_OR_LESS_THAN_A_YEAR = "None or less than a year";
 const ONE_YEAR = "1 year";
@@ -15,13 +18,30 @@ const FIVE_YEARS_OR_MORE = "5 years or more";
 
 function CanadianWorkExperience(props) {
 
-  const handleCanadianWorkExperienceChange = (event, child) => {
-    // super.handleSectionABChange(
-    //   child,
-    //   props.target,
-    //   PointsClass.CANADIAN_WORK_EXPERIENCE_KEY,
-    //   PointsClass.SPOUSE_CANADIAN_WORK_EXPERIENCE_KEY
-    // );
+  const [oldExperience, setOldExperience] = useState(null)
+  const [newExperience, setNewExperience] = useState(null)
+
+  const partnered = useSelector(state => state.partnered.value)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!oldExperience && !newExperience) return
+    const partneredValue = partnered ? 'partnered' : 'single'
+    let pointsToAdd
+    if (oldExperience) {
+      pointsToAdd = pointsJson[oldExperience][partneredValue] - 
+        pointsJson[newExperience][partneredValue]
+    }
+    else {
+      pointsToAdd = pointsJson[newExperience][partneredValue]
+    }
+    setOldExperience(newExperience)
+    dispatch(incrementByAmount(pointsToAdd))
+  }, [newExperience])
+
+  const handleCanadianWorkExperienceChange = (_, child) => {
+    const pointsJsonId = child.props.id
+    setNewExperience(pointsJsonId)
   }
 
   return (
@@ -29,7 +49,7 @@ function CanadianWorkExperience(props) {
       <FormControl variant="outlined" className="inputFields">
         <InputLabel>Canadian work experience</InputLabel>
         <Select
-          onChange={() => {alert('TODO')}}
+          onChange={handleCanadianWorkExperienceChange}
           label="Canadian work experience"
         >
           <MenuItem id={

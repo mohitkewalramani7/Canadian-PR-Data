@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -6,7 +8,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Tooltip from "@material-ui/core/Tooltip";
 
-import PointsClass from "../PointsClass";
+import { incrementByAmount } from '../../Features/countUpdate';
+const pointsJson = require('../../points.json')
 
 const LESS_THAN_SECONDARY_SCHOOL = "Less than secondary school (high school)";
 const SECONDARY_DIPLOMA = "Secondary diploma (high school graduation)";
@@ -19,13 +22,32 @@ const DOCTORAL_LEVEL = "Doctoral level university degree (Ph.D.)";
 
 function Education(props) {
 
-  const handleEducationChange = (event, child) => {
-    // super.handleSectionABChange(
-    //   child,
-    //   this.props.target,
-    //   PointsClass.EDUCATION_LEVEL_KEY,
-    //   PointsClass.SPOUSE_EDUCATION_LEVEL_KEY
-    // );
+  const [oldEducationValue, setOldEducationValue] = useState(null)
+  const [newEducationValue, setNewEducationValue] = useState(null)
+
+  const partnered = useSelector(state => state.partnered.value)
+  const dispatch = useDispatch()
+
+  const isPrincipal = props.target === 'principal'
+
+  useEffect(() => {
+    if (!oldEducationValue && !newEducationValue) return
+    const partneredValue = partnered ? 'partnered' : 'single'
+    let pointsToAdd
+    if (oldEducationValue) {
+      pointsToAdd = pointsJson[newEducationValue][partneredValue] - 
+        pointsJson[oldEducationValue][partneredValue]
+    }
+    else {
+      pointsToAdd = pointsJson[newEducationValue][partneredValue]
+    }
+    setOldEducationValue(newEducationValue)
+    dispatch(incrementByAmount(pointsToAdd))
+  }, [newEducationValue])
+
+  const handleEducationChange = (_, child) => {
+    const pointsId = child.props.id
+    setNewEducationValue(pointsId)
   }
 
   return (
@@ -34,25 +56,21 @@ function Education(props) {
         <FormControl variant="outlined" className="inputFields">
           <InputLabel>Education</InputLabel>
           <Select
-            onChange={() => alert('todo...')}
+            onChange={handleEducationChange}
             label="Education"
           >
             <MenuItem id={
-              props.target === 'principal' ?
+              isPrincipal ?
                 'less_than_secondary_school' :
                 'spouse_less_than_secondary_school'
             }
                       value={0}>{LESS_THAN_SECONDARY_SCHOOL}</MenuItem>
             <MenuItem id={
-              props.target === 'principal' ?
-                'secondary_diploma' :
-                'spouse_secondary_diploma'
+              isPrincipal ? 'secondary_diploma' : 'spouse_secondary_diploma'
             }
                       value={1}>{SECONDARY_DIPLOMA}</MenuItem>
             <MenuItem id={
-              props.target === 'principal' ?
-                'one_year_degree' :
-                'spouse_one_year_degree'
+              isPrincipal ? 'one_year_degree' : 'spouse_one_year_degree'
             }
                       value={2}>
               <Tooltip title="One-year degree, diploma or certificate from  a
@@ -61,9 +79,7 @@ function Education(props) {
               </Tooltip>
             </MenuItem>
             <MenuItem id={
-              props.target === 'principal' ?
-                'two_year_program' :
-                'spouse_two_year_program'
+              isPrincipal ? 'two_year_program' : 'spouse_two_year_program'
             }
                       value={3}>
               <Tooltip title="Two-year program at a university, college,
@@ -72,9 +88,7 @@ function Education(props) {
               </Tooltip>
             </MenuItem>
             <MenuItem id={
-              props.target === 'principal' ?
-                'bachelors_degree' :
-                'spouse_bachelors_degree'
+              isPrincipal ? 'bachelors_degree' : 'spouse_bachelors_degree'
             }
                       value={4}>
               <Tooltip title="Bachelor's degree OR a three or more year program at
@@ -83,7 +97,7 @@ function Education(props) {
               </Tooltip>
             </MenuItem>
             <MenuItem id={
-              props.target === 'principal' ?
+              isPrincipal ?
                 'two_or_more_certificates' :
                 'spouse_two_or_more_certificates'
             }
@@ -94,9 +108,7 @@ function Education(props) {
               </Tooltip>
             </MenuItem>
             <MenuItem id={
-              props.target === 'principal' ?
-                'masters_degree' :
-                'spouse_masters_degree'
+              isPrincipal ? 'masters_degree' : 'spouse_masters_degree'
             }
                       value={6}>
               <Tooltip title="Master's degree, OR professional degree needed to
@@ -107,9 +119,7 @@ function Education(props) {
               </Tooltip>
             </MenuItem>
             <MenuItem id={
-              props.target === 'principal' ?
-                'doctoral_level' :
-                'spouse_doctoral_level'
+              isPrincipal ? 'doctoral_level' : 'spouse_doctoral_level'
             }
                       value={7}>{DOCTORAL_LEVEL}</MenuItem>
           </Select>

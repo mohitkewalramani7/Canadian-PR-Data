@@ -1,20 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 
-import PointsClass from "../PointsClass";
+import { useDispatch, useSelector } from 'react-redux';
+import { incrementByAmount } from '../../Features/countUpdate'
+const pointsJson = require('../../points.json')
 
 function Age(props) {
-  const returnAgeValue = (ageString) => {
-    if (ageString === ''){
-      this.setAgeValue(0);
-      return 0;
+
+  const [oldAgeValue, setOldAgeValue] = useState(null)
+  const [newAgeValue, setNewAgeValue] = useState(null)
+
+  const partnered = useSelector(state => state.partnered.value)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const getAgePointsKey = (age) => {
+      if (age <= 17){
+        return '17 or less';
+      }
+      else if (age >= 20 && age <= 29){
+        return '20 to 29';
+      }
+      else if (age >= 45){
+        return '45 or more';
+      }
+      else {
+        return age.toString();
+      }
     }
-    else{
-      let ageValue = parseInt(ageString);
-      this.setAgeValue(ageValue);
-      return ageValue;
+  
+    if (!oldAgeValue && !newAgeValue) return
+    const partneredValue = partnered ? 'partnered' : 'single'
+    const oldAgeKey = getAgePointsKey(oldAgeValue)
+    const newAgeKey = getAgePointsKey(newAgeValue)
+    let pointsToAdd
+    if (oldAgeValue) {
+      pointsToAdd = pointsJson[newAgeKey][partneredValue] - 
+        pointsJson[oldAgeKey][partneredValue]
     }
-  }
+    else {
+      pointsToAdd = pointsJson[newAgeKey][partneredValue]
+    }
+    setOldAgeValue(newAgeValue)
+    dispatch(incrementByAmount(pointsToAdd))
+  }, [newAgeValue])
 
   return (
     <div className="inputFieldDivs">
@@ -23,17 +52,15 @@ function Age(props) {
         id="age"
         label="Age"
         variant="outlined"
+        type="number"
         onChange={(e) => {
           const age = e.target.value;
           const re = /^[0-9]+$/;
           if (age === '' || re.test(age)){
-            let oldAge = PointsClass.SECTION_A_FIELDS[PointsClass.AGE_KEY];
-            let newAgeValue = returnAgeValue(age);
-            this.setAgeValue(newAgeValue);
-            this.handleAgeChange(oldAge, newAgeValue);
+            setNewAgeValue(age)
           }
         }}
-        value={PointsClass.SECTION_A_FIELDS[PointsClass.AGE_KEY]}
+        value={newAgeValue}
       />
     </div>
   )

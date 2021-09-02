@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
-import PointsClass from "../PointsClass";
+import { incrementByAmount } from '../../Features/countUpdate'
+const pointsJson = require('../../points.json')
 
 const LESS_THAN_CLB_4 = "Less than CLB 4";
 const CLB_4_OR_5 = "CLB 4 or 5";
@@ -16,8 +19,30 @@ const CLB_10_OR_MORE = "CLB 10 or more";
 
 function FirstLanguage(props) {
 
-  const handleFirstLanguageChange = (event, child) => {
-    // super.handleSectionAChange(event, child, PointsClass.FIRST_LANGUAGE_KEY);
+  const [oldfirstLanguageSelection, setOldFirstLanguageSelection] = useState(null)
+  const [newFirstLanguageSelection, setNewFirstLanguageSelection] = useState(null)
+
+  const partnered = useSelector(state => state.partnered.value)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!oldfirstLanguageSelection && !newFirstLanguageSelection) return
+    const partneredValue = partnered ? 'partnered' : 'single'
+    let pointsToAdd
+    if (oldfirstLanguageSelection) {
+      pointsToAdd = pointsJson[newFirstLanguageSelection][partneredValue] - 
+        pointsJson[oldfirstLanguageSelection][partneredValue]
+    }
+    else {
+      pointsToAdd = pointsJson[newFirstLanguageSelection][partneredValue]
+    }
+    setOldFirstLanguageSelection(newFirstLanguageSelection)
+    dispatch(incrementByAmount(pointsToAdd))
+  }, [newFirstLanguageSelection])
+
+  const handleFirstLanguageChange = (_, child) => {
+    const pointsJsonId = child.props.id
+    setNewFirstLanguageSelection(pointsJsonId)
   }
 
   return (
@@ -25,7 +50,7 @@ function FirstLanguage(props) {
       <FormControl variant="outlined" className="inputFields">
         <InputLabel>First Official Language</InputLabel>
         <Select
-          onChange={() => handleFirstLanguageChange()}
+          onChange={handleFirstLanguageChange}
           label="First Official Language"
         >
           <MenuItem id="first_lang_less_than_clb_4"

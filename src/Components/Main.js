@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 
 import SectionA from "./SectionA/SectionA";
 import SectionB from "./SectionB/SectionB";
@@ -10,6 +11,7 @@ function Main(props) {
   var PARTNERED = false;
   var POINTS_JSON;
 
+  const currentPoints = useSelector(state => state.counter.value)
   const [totalPoints, setTotalPoints] = useState(0)
 
   useEffect(() => {
@@ -37,7 +39,7 @@ function Main(props) {
   }
 
   return (
-    <div>
+    <div style={{display: 'flex'}}>
       <div id="currentScore">
         <SectionA updatePoints={(points) => updatePoints(points)}/>
         <SectionB updatePoints={(points) => updatePoints(points)}/>
@@ -47,7 +49,7 @@ function Main(props) {
       <div id="entryChance">
         <h3>Scores and chances</h3>
         <div>
-          <h4>{`Current Score: ${totalPoints}`}</h4>
+          <h4>{`Current Score: ${currentPoints}`}</h4>
         </div>
       </div>
     </div>
