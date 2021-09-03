@@ -256,7 +256,7 @@
     "foreign_work_exp_and_clb_9_or_more": 25
   },
   "foreign_work_exp_good_lang_proficiency_3_years_foreign_work_exp": {
-    "foreign_work_exp_and_clb_7_or_more": 20,
+    "foreign_work_exp_and_clb_7_or_more": 25,
     "foreign_work_exp_and_clb_9_or_more": 50
   },
 
@@ -269,7 +269,7 @@
     "foreign_work_exp_and_2+_years_canadian_work_exp": 25
   },
   "foreign_work_experience_canadian_work_exp_3_years_foreign_work_exp": {
-    "foreign_work_exp_and_1+_year_canadian_work_exp": 20,
+    "foreign_work_exp_and_1+_year_canadian_work_exp": 25,
     "foreign_work_exp_and_2+_years_canadian_work_exp": 50
   },
 
@@ -280,8 +280,8 @@
 
 
   "sibling_in_canada": 15,
-  "nclc_7_or_higher_and_clb_4_or_lower": 15,
-  "nclc_7_or_higher_and_clb_5_or_higher": 30,
+  "nclc_7_or_higher_and_clb_4_or_lower": 25,
+  "nclc_7_or_higher_and_clb_5_or_higher": 50,
   "post_secondary_education_in_canada_1_or_2_years": 15,
   "post_secondary_education_in_canada_3_years_longer": 30,
   "arranged_employment_noc_00": 200,
