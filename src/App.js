@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h2 style={{marginBottom: '100px'}}>
-          A PR Application to Canada (Comprehensive Ranking System)
+          A PR Application to Canada (Express Entry CRS)
         </h2>
       </header>
       <Main/>

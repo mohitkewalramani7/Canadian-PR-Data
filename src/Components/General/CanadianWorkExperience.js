@@ -24,20 +24,37 @@ function CanadianWorkExperience(props) {
   const partnered = useSelector(state => state.partnered.value)
   const dispatch = useDispatch()
 
+  const isPrincipal = props.target === 'principal'
+
   useEffect(() => {
+    const setUpJsonKey = (educationKey, partnerValue = null) => {
+      return partnerValue ?
+        pointsJson[educationKey][partnerValue] :
+        pointsJson[educationKey]
+    }
+
     if (!oldExperience && !newExperience) return
-    const partneredValue = partnered ? 'partnered' : 'single'
+    const partneredValue = isPrincipal ? (partnered ? 'partnered' : 'single') : null
     let pointsToAdd
     if (oldExperience) {
-      pointsToAdd = pointsJson[oldExperience][partneredValue] - 
-        pointsJson[newExperience][partneredValue]
+      pointsToAdd = setUpJsonKey(oldExperience, partneredValue) - 
+        setUpJsonKey(newExperience, partneredValue)
     }
     else {
-      pointsToAdd = pointsJson[newExperience][partneredValue]
+      pointsToAdd = setUpJsonKey(newExperience, partneredValue)
     }
     setOldExperience(newExperience)
     dispatch(incrementByAmount(pointsToAdd))
   }, [newExperience])
+
+  useEffect(() => {
+    if (!isPrincipal || !oldExperience) return
+    const newPartneredValue = partnered ? 'partnered' : 'single'
+    const oldPartneredValue = partnered ? 'single' : 'partnered'
+    let pointsToAdd = pointsJson[oldExperience][newPartneredValue] - 
+      pointsJson[oldExperience][oldPartneredValue]
+    dispatch(incrementByAmount(pointsToAdd))
+  }, [partnered])
 
   const handleCanadianWorkExperienceChange = (_, child) => {
     const pointsJsonId = child.props.id
@@ -53,37 +70,37 @@ function CanadianWorkExperience(props) {
           label="Canadian work experience"
         >
           <MenuItem id={
-            props.target === 'principal' ?
+            isPrincipal ?
               'canadian_work_exp_none_or_less_than_1_year' :
               'spouse_canadian_work_exp_none_or_less_than_1_year'
           }
                     value={0}>{NONE_OR_LESS_THAN_A_YEAR}</MenuItem>
           <MenuItem id={
-            props.target === 'principal' ?
+            isPrincipal ?
               'canadian_work_exp_1_year' :
               'spouse_canadian_work_exp_1_year'
           }
                     value={1}>{ONE_YEAR}</MenuItem>
           <MenuItem id={
-            props.target === 'principal' ?
+            isPrincipal ?
               'canadian_work_exp_2_years' :
               'spouse_canadian_work_exp_2_years'
           }
                     value={2}>{TWO_YEARS}</MenuItem>
           <MenuItem id={
-            props.target === 'principal' ?
+            isPrincipal ?
               'canadian_work_exp_3_years' :
               'spouse_canadian_work_exp_3_years'
           }
                     value={3}>{THREE_YEARS}</MenuItem>
           <MenuItem id={
-            props.target === 'principal' ?
+            isPrincipal ?
               'canadian_work_exp_4_years' :
               'spouse_canadian_work_exp_4_years'
           }
                     value={4}>{FOUR_YEARS}</MenuItem>
           <MenuItem id={
-            props.target === 'principal' ?
+            isPrincipal ?
               'canadian_work_exp_5_years_or_more' :
               'spouse_canadian_work_exp_5_years_or_more'
           }

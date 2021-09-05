@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import Checkbox from '@material-ui/core/Checkbox';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -6,24 +8,19 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+import { setValue } from '../../Features/partneredUpdate'
 import CanadianWorkExperience from "../General/CanadianWorkExperience";
 import Education from "../General/Education";
-import Main from "../Main";
-import PointsClass from "../PointsClass";
 import SubsidiaryLanguage from "../General/SubsidiaryLanguage";
 
 function SectionB(props) {
 
-  const showSpouseDetails = () => {
-    if (Main.PARTNERED){
-      return 'inline';
-    }
-    return 'none';
-  }
+  const [hasPartner, setHasPartner] = useState(false)
+  const dispatch = useDispatch()
 
-  const handleApplicableChange = () => {
-    this.handlePartneredChange();
-  }
+  useEffect(() => {
+    dispatch(setValue(hasPartner))
+  }, [hasPartner])
 
   return (
       <ExpansionPanel>
@@ -41,24 +38,21 @@ function SectionB(props) {
                 <Checkbox
                   name="applicable"
                   color="primary"
-                  onChange={() => handleApplicableChange()}
+                  onChange={() => setHasPartner(!hasPartner)}
                 />
               }
               label="Is Applicable?"
               style={{marginBottom: '20px'}}
             />
-            <div id="spouseDetails" style={{display: showSpouseDetails()}}>
+            {hasPartner && <div>
               <Education
-                target='spouse'
-                updatePoints={props.updatePoints}/>
+                target='spouse' />
               <SubsidiaryLanguage
                 target='spouse'
-                title="First Official Language"
-                updatePoints={props.updatePoints}/>
+                title="First Official Language" />
               <CanadianWorkExperience
-                target='spouse'
-                updatePoints={props.updatePoints}/>
-            </div>
+                target='spouse' />
+            </div>}
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>

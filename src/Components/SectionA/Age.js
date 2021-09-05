@@ -13,22 +13,7 @@ function Age(props) {
   const partnered = useSelector(state => state.partnered.value)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const getAgePointsKey = (age) => {
-      if (age <= 17){
-        return '17 or less';
-      }
-      else if (age >= 20 && age <= 29){
-        return '20 to 29';
-      }
-      else if (age >= 45){
-        return '45 or more';
-      }
-      else {
-        return age.toString();
-      }
-    }
-  
+  useEffect(() => {  
     if (!oldAgeValue && !newAgeValue) return
     const partneredValue = partnered ? 'partnered' : 'single'
     const oldAgeKey = getAgePointsKey(oldAgeValue)
@@ -44,6 +29,31 @@ function Age(props) {
     setOldAgeValue(newAgeValue)
     dispatch(incrementByAmount(pointsToAdd))
   }, [newAgeValue])
+
+  useEffect(() => {
+    if (!oldAgeValue && !newAgeValue) return
+    const newPartneredValue = partnered ? 'partnered' : 'single'
+    const oldPartneredValue = partnered ? 'single' : 'partnered'
+    const oldAgeKey = getAgePointsKey(oldAgeValue)
+    let pointsToAdd = pointsJson[oldAgeKey][newPartneredValue] - 
+      pointsJson[oldAgeKey][oldPartneredValue]
+    dispatch(incrementByAmount(pointsToAdd))
+  }, [partnered])
+
+  const getAgePointsKey = (age) => {
+    if (age <= 17){
+      return '17 or less';
+    }
+    else if (age >= 20 && age <= 29){
+      return '20 to 29';
+    }
+    else if (age >= 45){
+      return '45 or more';
+    }
+    else {
+      return age.toString();
+    }
+  }
 
   return (
     <div className="inputFieldDivs">

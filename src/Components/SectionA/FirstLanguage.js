@@ -40,6 +40,15 @@ function FirstLanguage(props) {
     dispatch(incrementByAmount(pointsToAdd))
   }, [newFirstLanguageSelection])
 
+  useEffect(() => {
+    if (!oldfirstLanguageSelection) return
+    const newPartneredValue = partnered ? 'partnered' : 'single'
+    const oldPartneredValue = partnered ? 'single' : 'partnered'
+    let pointsToAdd = pointsJson[oldfirstLanguageSelection][newPartneredValue] - 
+      pointsJson[oldfirstLanguageSelection][oldPartneredValue]
+    dispatch(incrementByAmount(pointsToAdd))
+  }, [partnered])
+
   const handleFirstLanguageChange = (_, child) => {
     const pointsJsonId = child.props.id
     setNewFirstLanguageSelection(pointsJsonId)

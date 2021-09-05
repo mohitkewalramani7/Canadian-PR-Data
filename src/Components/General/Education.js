@@ -31,19 +31,34 @@ function Education(props) {
   const isPrincipal = props.target === 'principal'
 
   useEffect(() => {
+    const setUpJsonKey = (educationKey, partnerValue = null) => {
+      return partnerValue ?
+        pointsJson[educationKey][partnerValue] :
+        pointsJson[educationKey]
+    }
+
     if (!oldEducationValue && !newEducationValue) return
-    const partneredValue = partnered ? 'partnered' : 'single'
+    const partneredValue = isPrincipal ? (partnered ? 'partnered' : 'single') : null
     let pointsToAdd
     if (oldEducationValue) {
-      pointsToAdd = pointsJson[newEducationValue][partneredValue] - 
-        pointsJson[oldEducationValue][partneredValue]
+      pointsToAdd = setUpJsonKey(newEducationValue, partneredValue) - 
+        setUpJsonKey(oldEducationValue, partneredValue)
     }
     else {
-      pointsToAdd = pointsJson[newEducationValue][partneredValue]
+      pointsToAdd = setUpJsonKey(newEducationValue, partneredValue)
     }
     setOldEducationValue(newEducationValue)
     dispatch(incrementByAmount(pointsToAdd))
   }, [newEducationValue])
+
+  useEffect(() => {
+    if (!isPrincipal || !oldEducationValue) return
+    const newPartneredValue = partnered ? 'partnered' : 'single'
+    const oldPartneredValue = partnered ? 'single' : 'partnered'
+    let pointsToAdd = pointsJson[oldEducationValue][newPartneredValue] - 
+      pointsJson[oldEducationValue][oldPartneredValue]
+    dispatch(incrementByAmount(pointsToAdd))
+  }, [partnered])
 
   const handleEducationChange = (_, child) => {
     const pointsId = child.props.id

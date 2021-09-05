@@ -15,26 +15,43 @@ const CLB_9_OR_MORE = "CLB 9 or more";
 
 function SubsidiaryLanguage(props) {
 
-  const [newSecondLanguageSelection, setNewSecondLanguageSelection] = useState(null)
   const [oldSecondLanguageSelection, setOldSecondLanguageSelection] = useState(null)
+  const [newSecondLanguageSelection, setNewSecondLanguageSelection] = useState(null)
 
   const partnered = useSelector(state => state.partnered.value)
   const dispatch = useDispatch()
 
+  const isPrincipal = props.target === 'principal'
+
   useEffect(() => {
+    const setUpJsonKey = (educationKey, partnerValue = null) => {
+      return partnerValue ?
+        pointsJson[educationKey][partnerValue] :
+        pointsJson[educationKey]
+    }
+
     if (!newSecondLanguageSelection && !oldSecondLanguageSelection) return
-    const partneredValue = partnered ? 'partnered' : 'single'
+    const partneredValue = isPrincipal ? (partnered ? 'partnered' : 'single') : null
     let pointsToAdd
     if (oldSecondLanguageSelection) {
-      pointsToAdd = pointsJson[newSecondLanguageSelection][partneredValue] - 
-        pointsJson[oldSecondLanguageSelection][partneredValue]
+      pointsToAdd = setUpJsonKey(newSecondLanguageSelection, partneredValue) - 
+        setUpJsonKey(oldSecondLanguageSelection, partneredValue)
     }
     else {
-      pointsToAdd = pointsJson[newSecondLanguageSelection][partneredValue]
+      pointsToAdd = setUpJsonKey(newSecondLanguageSelection, partneredValue)
     }
     setOldSecondLanguageSelection(newSecondLanguageSelection)
     dispatch(incrementByAmount(pointsToAdd))
   }, [newSecondLanguageSelection])
+
+  useEffect(() => {
+    if (!isPrincipal || !oldSecondLanguageSelection) return
+    const newPartneredValue = partnered ? 'partnered' : 'single'
+    const oldPartneredValue = partnered ? 'single' : 'partnered'
+    let pointsToAdd = pointsJson[oldSecondLanguageSelection][newPartneredValue] - 
+      pointsJson[oldSecondLanguageSelection][oldPartneredValue]
+    dispatch(incrementByAmount(pointsToAdd))
+  }, [partnered])
 
   const handleSubsidiaryLanguageChange = (_, child) => {
     const pointsJsonId = child.props.id
@@ -49,19 +66,19 @@ function SubsidiaryLanguage(props) {
           onChange={handleSubsidiaryLanguageChange}
           label={props.title}
         >
-          <MenuItem id={props.target === 'principal' ?
+          <MenuItem id={isPrincipal ?
             'second_lang_clb_4_or_less' :
             'spouse_first_lang_clb_4_or_less'}
                     value={0}>{CLB_4_OR_LESS}</MenuItem>
-          <MenuItem id={props.target === 'principal' ?
+          <MenuItem id={isPrincipal ?
             'second_lang_clb_5_6' :
             'spouse_first_lang_clb_5_6'}
                     value={1}>{CLB_5_OR_6}</MenuItem>
-          <MenuItem id={props.target === 'principal' ?
+          <MenuItem id={isPrincipal ?
             'second_lang_clb_7_8' :
             'spouse_first_lang_clb_7_8'}
                     value={2}>{CLB_7_OR_8}</MenuItem>
-          <MenuItem id={props.target === 'principal' ?
+          <MenuItem id={isPrincipal ?
             'second_lang_clb_9_or_more' :
             'spouse_first_lang_clb_9_or_more'
           }

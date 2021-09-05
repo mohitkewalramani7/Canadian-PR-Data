@@ -7,7 +7,7 @@ export const partnered = createSlice({
   },
   reducers: {
     setValue: (state, action) => {
-      state.value = action
+      state.value = action.payload
     }
   }
 })

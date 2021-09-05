@@ -25,22 +25,18 @@ function SectionA(props) {
       <ExpansionPanelDetails>
         <div style={{width: '100%'}}>
 
-          <Age updatePoints={props.updatePoints}/>
+          <Age />
 
-          <Education
-            target='principal'
-            updatePoints={props.updatePoints}/>
+          <Education target='principal' />
 
-          <FirstLanguage updatePoints={props.updatePoints}/>
+          <FirstLanguage />
 
           <SubsidiaryLanguage
             title="Second Official Language"
-            target='principal'
-            updatePoints={props.updatePoints}/>
+            target='principal' />
 
           <CanadianWorkExperience
-            target='principal'
-            updatePoints={props.updatePoints}/>
+            target='principal' />
 
         </div>
       </ExpansionPanelDetails>
