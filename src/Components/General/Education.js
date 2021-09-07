@@ -52,12 +52,19 @@ function Education(props) {
   }, [newEducationValue])
 
   useEffect(() => {
-    if (!isPrincipal || !oldEducationValue) return
-    const newPartneredValue = partnered ? 'partnered' : 'single'
-    const oldPartneredValue = partnered ? 'single' : 'partnered'
-    let pointsToAdd = pointsJson[oldEducationValue][newPartneredValue] - 
-      pointsJson[oldEducationValue][oldPartneredValue]
-    dispatch(incrementByAmount(pointsToAdd))
+    if (!oldEducationValue) return
+    if (isPrincipal) {
+      const newPartneredValue = partnered ? 'partnered' : 'single'
+      const oldPartneredValue = partnered ? 'single' : 'partnered'
+      let pointsToAdd = pointsJson[oldEducationValue][newPartneredValue] - 
+        pointsJson[oldEducationValue][oldPartneredValue]
+      dispatch(incrementByAmount(pointsToAdd))
+    }
+    else {
+      let pointsDifference = pointsJson[oldEducationValue]
+      if (!partnered) pointsDifference = pointsDifference * -1
+      dispatch(incrementByAmount(pointsDifference))
+    }
   }, [partnered])
 
   const handleEducationChange = (_, child) => {

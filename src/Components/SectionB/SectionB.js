@@ -44,7 +44,7 @@ function SectionB(props) {
               label="Is Applicable?"
               style={{marginBottom: '20px'}}
             />
-            {hasPartner && <div>
+            <div style={{ display: hasPartner ? 'inline' : 'none' }}>
               <Education
                 target='spouse' />
               <SubsidiaryLanguage
@@ -52,7 +52,7 @@ function SectionB(props) {
                 title="First Official Language" />
               <CanadianWorkExperience
                 target='spouse' />
-            </div>}
+            </div>
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>

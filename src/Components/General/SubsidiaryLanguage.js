@@ -45,12 +45,19 @@ function SubsidiaryLanguage(props) {
   }, [newSecondLanguageSelection])
 
   useEffect(() => {
-    if (!isPrincipal || !oldSecondLanguageSelection) return
-    const newPartneredValue = partnered ? 'partnered' : 'single'
-    const oldPartneredValue = partnered ? 'single' : 'partnered'
-    let pointsToAdd = pointsJson[oldSecondLanguageSelection][newPartneredValue] - 
-      pointsJson[oldSecondLanguageSelection][oldPartneredValue]
-    dispatch(incrementByAmount(pointsToAdd))
+    if (!oldSecondLanguageSelection) return
+    if (isPrincipal) {
+      const newPartneredValue = partnered ? 'partnered' : 'single'
+      const oldPartneredValue = partnered ? 'single' : 'partnered'
+      let pointsToAdd = pointsJson[oldSecondLanguageSelection][newPartneredValue] - 
+        pointsJson[oldSecondLanguageSelection][oldPartneredValue]
+      dispatch(incrementByAmount(pointsToAdd))
+    }
+    else {
+      let pointsDifference = pointsJson[oldSecondLanguageSelection]
+      if (!partnered) pointsDifference = pointsDifference * -1
+      dispatch(incrementByAmount(pointsDifference))
+    }
   }, [partnered])
 
   const handleSubsidiaryLanguageChange = (_, child) => {
