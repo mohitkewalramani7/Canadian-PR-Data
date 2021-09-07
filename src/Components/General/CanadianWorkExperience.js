@@ -37,8 +37,8 @@ function CanadianWorkExperience(props) {
     const partneredValue = isPrincipal ? (partnered ? 'partnered' : 'single') : null
     let pointsToAdd
     if (oldExperience) {
-      pointsToAdd = setUpJsonKey(oldExperience, partneredValue) - 
-        setUpJsonKey(newExperience, partneredValue)
+      pointsToAdd = setUpJsonKey(newExperience, partneredValue) - 
+        setUpJsonKey(oldExperience, partneredValue)
     }
     else {
       pointsToAdd = setUpJsonKey(newExperience, partneredValue)
