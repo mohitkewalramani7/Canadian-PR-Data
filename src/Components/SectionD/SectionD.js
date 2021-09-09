@@ -72,6 +72,8 @@ function SectionD(props) {
         addPoints(!provTerNomination)
         setProvTerNomination(!provTerNomination)
         break
+      default:
+        break
     }
   }
 

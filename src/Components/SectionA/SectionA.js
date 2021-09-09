@@ -8,7 +8,6 @@ import Age from "./Age";
 import CanadianWorkExperience from "../General/CanadianWorkExperience";
 import Education from "../General/Education"
 import FirstLanguage from "./FirstLanguage";
-import PointsClass from "../PointsClass";
 import SubsidiaryLanguage from "../General/SubsidiaryLanguage";
 
 function SectionA(props) {

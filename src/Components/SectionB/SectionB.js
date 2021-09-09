@@ -20,7 +20,7 @@ function SectionB(props) {
 
   useEffect(() => {
     dispatch(setValue(hasPartner))
-  }, [hasPartner])
+  }, [dispatch, hasPartner])
 
   return (
       <ExpansionPanel>
