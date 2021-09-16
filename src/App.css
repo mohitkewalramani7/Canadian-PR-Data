@@ -16,6 +16,11 @@
   display: inline-block;
 }
 
+#viewHistogramButton {
+  margin-top: 20px;
+  text-transform: none;
+}
+
 #entryChance {
   width: 50%;
   height: 100%;
