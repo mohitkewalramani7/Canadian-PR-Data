@@ -10,8 +10,6 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
 import ForeignWorkExperience from "./ForeignWorkExperience"
 import FormCheckbox from "../General/Checkbox"
 
-import { incrementByAmount } from "../../Features/countUpdate"
-
 function SectionC(props) {
 
   const [certificate, setCertificate] = useState(false)

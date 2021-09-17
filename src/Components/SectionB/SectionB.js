@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
-import Checkbox from '@material-ui/core/Checkbox';
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox'
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import ExpansionPanel from "@material-ui/core/ExpansionPanel"
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 import { setValue } from '../../Features/partneredUpdate'
-import CanadianWorkExperience from "../General/CanadianWorkExperience";
-import Education from "../General/Education";
-import SubsidiaryLanguage from "../General/SubsidiaryLanguage";
+import CanadianWorkExperience from "../General/CanadianWorkExperience"
+import Education from "../General/Education"
+import SubsidiaryLanguage from "../General/SubsidiaryLanguage"
 
 function SectionB(props) {
 

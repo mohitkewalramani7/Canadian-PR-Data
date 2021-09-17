@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import React, { useState } from "react"
+import { useDispatch } from 'react-redux'
 
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import FormCheckbox from "../General/Checkbox";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import ExpansionPanel from "@material-ui/core/ExpansionPanel"
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
+import FormCheckbox from "../General/Checkbox"
 
 import { incrementByAmount } from '../../Features/countUpdate'
 const pointsJson = require('../../points.json')
 
-const SIBLING_IN_CANADA = 'sibling_in_canada';
-const NCLC_7_HIGHER_CLB_4_LOWER = 'nclc_7_or_higher_and_clb_4_or_lower';
-const NCLC_7_HIGHER_CLB_5_HIGHER = 'nclc_7_or_higher_and_clb_5_or_higher';
-const POST_SECONDARY_EDUCATION_CANADA_1_2_YEARS = 'post_secondary_education_in_canada_1_or_2_years';
-const POST_SECONDARY_EDUCATION_CANADA_3_YEARS = 'post_secondary_education_in_canada_3_years_longer';
-const ARRANGED_EMPLOYMENT_NOC_00 = 'arranged_employment_noc_00';
-const ARRANGED_EMPLOYMENT_NOC_0_A_B = 'arranged_employment_noc_0_a_b';
-const PROVINCIAL_TERRITORIAL_NOMINATION = 'provincial_or_territorial_nomination';
+const SIBLING_IN_CANADA = 'sibling_in_canada'
+const NCLC_7_HIGHER_CLB_4_LOWER = 'nclc_7_or_higher_and_clb_4_or_lower'
+const NCLC_7_HIGHER_CLB_5_HIGHER = 'nclc_7_or_higher_and_clb_5_or_higher'
+const POST_SECONDARY_EDUCATION_CANADA_1_2_YEARS = 'post_secondary_education_in_canada_1_or_2_years'
+const POST_SECONDARY_EDUCATION_CANADA_3_YEARS = 'post_secondary_education_in_canada_3_years_longer'
+const ARRANGED_EMPLOYMENT_NOC_00 = 'arranged_employment_noc_00'
+const ARRANGED_EMPLOYMENT_NOC_0_A_B = 'arranged_employment_noc_0_a_b'
+const PROVINCIAL_TERRITORIAL_NOMINATION = 'provincial_or_territorial_nomination'
 
 function SectionD(props) {
 

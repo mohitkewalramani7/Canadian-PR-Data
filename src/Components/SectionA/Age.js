@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import TextField from "@material-ui/core/TextField";
+import React, { useEffect, useState } from "react"
+import TextField from "@material-ui/core/TextField"
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 import { incrementByAmount } from '../../Features/countUpdate'
 const pointsJson = require('../../points.json')
 

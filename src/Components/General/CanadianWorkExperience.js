@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl"
+import InputLabel from "@material-ui/core/InputLabel"
+import MenuItem from "@material-ui/core/MenuItem"
+import Select from "@material-ui/core/Select"
 
 import { incrementByAmount } from '../../Features/countUpdate'
-import { setCanadianWorkExperienceValue } from '../../Features/sectionCUpdate';
+import { setCanadianWorkExperienceValue } from '../../Features/sectionCUpdate'
 const pointsJson = require('../../points.json')
 
-const NONE_OR_LESS_THAN_A_YEAR = "None or less than a year";
-const ONE_YEAR = "1 year";
-const TWO_YEARS = "2 years";
-const THREE_YEARS = "3 years";
-const FOUR_YEARS = "4 years";
-const FIVE_YEARS_OR_MORE = "5 years or more";
+const NONE_OR_LESS_THAN_A_YEAR = "None or less than a year"
+const ONE_YEAR = "1 year"
+const TWO_YEARS = "2 years"
+const THREE_YEARS = "3 years"
+const FOUR_YEARS = "4 years"
+const FIVE_YEARS_OR_MORE = "5 years or more"
 
 function CanadianWorkExperience(props) {
 
