@@ -6,6 +6,10 @@ Data obtained from
 
 Accessed May 2020
 
+## Icon Attributions
+
+Canada Flag icon downloaded from: https://www.flaticon.com/free-icons/canada-flag
+
 ---------------------------------------------------------------------------------------------------------
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
