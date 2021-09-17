@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import Divider from '@material-ui/core/Divider'
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
@@ -19,8 +19,6 @@ function SectionC(props) {
   const firstLanguageStateValue = useSelector(state => state.sectionC.firstLanguage)
   const canadianWorkExperienceStateValue = useSelector(state => state.sectionC.canadianWorkExperience)
   
-  const dispatch = useDispatch()
-
   const [first, setFirst] = useState(0)
   const [second, setSecond] = useState(0)
   const [third, setThird] = useState(0)
@@ -103,7 +101,7 @@ function SectionC(props) {
     if (educationStateValue && canadianWorkExperienceStateValue) {
       setSecond(calculateSum())
     }
-  }, [canadianWorkExperienceStateValue, canadianWorkExperienceStateValue])
+  }, [educationStateValue, canadianWorkExperienceStateValue])
 
   /**
    * Third Table

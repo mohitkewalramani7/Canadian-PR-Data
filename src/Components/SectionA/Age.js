@@ -28,7 +28,7 @@ function Age(props) {
     }
     setOldAgeValue(newAgeValue)
     dispatch(incrementByAmount(pointsToAdd))
-  }, [newAgeValue])
+  }, [dispatch, newAgeValue])
 
   useEffect(() => {
     if (!oldAgeValue && !newAgeValue) return
@@ -38,7 +38,7 @@ function Age(props) {
     let pointsToAdd = pointsJson[oldAgeKey][newPartneredValue] - 
       pointsJson[oldAgeKey][oldPartneredValue]
     dispatch(incrementByAmount(pointsToAdd))
-  }, [partnered])
+  }, [dispatch, partnered])
 
   const getAgePointsKey = (age) => {
     if (age <= 17){

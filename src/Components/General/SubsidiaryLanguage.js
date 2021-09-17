@@ -43,7 +43,7 @@ function SubsidiaryLanguage(props) {
     }
     setOldSecondLanguageSelection(newSecondLanguageSelection)
     dispatch(incrementByAmount(pointsToAdd))
-  }, [newSecondLanguageSelection])
+  }, [dispatch, newSecondLanguageSelection])
 
   useEffect(() => {
     if (!oldSecondLanguageSelection) return
@@ -59,7 +59,7 @@ function SubsidiaryLanguage(props) {
       if (!partnered) pointsDifference = pointsDifference * -1
       dispatch(incrementByAmount(pointsDifference))
     }
-  }, [partnered])
+  }, [dispatch, partnered])
 
   const handleSubsidiaryLanguageChange = (_, child) => {
     const pointsJsonId = child.props.id

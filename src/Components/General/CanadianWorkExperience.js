@@ -46,13 +46,13 @@ function CanadianWorkExperience(props) {
     }
     setOldExperience(newExperience)
     dispatch(incrementByAmount(pointsToAdd))
-  }, [newExperience])
+  }, [dispatch, newExperience])
 
   useEffect(() => {
     if (isPrincipal && newExperience) {
       dispatch(setCanadianWorkExperienceValue(newExperience))
     }
-  }, [newExperience])
+  }, [dispatch, newExperience])
 
   useEffect(() => {
     if (!oldExperience) return
@@ -68,7 +68,7 @@ function CanadianWorkExperience(props) {
       if (!partnered) pointsDifference = pointsDifference * -1
       dispatch(incrementByAmount(pointsDifference))
     }
-  }, [partnered])
+  }, [dispatch, partnered])
 
   const handleCanadianWorkExperienceChange = (_, child) => {
     const pointsJsonId = child.props.id

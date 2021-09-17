@@ -51,13 +51,13 @@ function Education(props) {
     }
     setOldEducationValue(newEducationValue)
     dispatch(incrementByAmount(pointsToAdd))
-  }, [newEducationValue])
+  }, [dispatch, newEducationValue])
 
   useEffect(() => {
     if (isPrincipal && newEducationValue) {
       dispatch(setEducationValue(newEducationValue))
     }
-  }, [newEducationValue])
+  }, [dispatch, newEducationValue])
 
   useEffect(() => {
     if (!oldEducationValue) return
@@ -73,7 +73,7 @@ function Education(props) {
       if (!partnered) pointsDifference = pointsDifference * -1
       dispatch(incrementByAmount(pointsDifference))
     }
-  }, [partnered])
+  }, [dispatch, partnered])
 
   const handleEducationChange = (_, child) => {
     const pointsId = child.props.id

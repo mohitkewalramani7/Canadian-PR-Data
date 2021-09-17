@@ -102,7 +102,7 @@ function Main(props) {
       const myNode = document.getElementById("histogramSection");
       myNode.innerHTML = '';
     }
-  }, [showHistogram])
+  }, [showHistogram, cumulativeList])
 
   useEffect(() => {
     const preProcessData = () => {
