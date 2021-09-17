@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import Tooltip from "@material-ui/core/Tooltip";
+import FormControl from "@material-ui/core/FormControl"
+import FormHelperText from "@material-ui/core/FormHelperText"
+import InputLabel from "@material-ui/core/InputLabel"
+import MenuItem from "@material-ui/core/MenuItem"
+import Select from "@material-ui/core/Select"
+import Tooltip from "@material-ui/core/Tooltip"
 
-import { incrementByAmount } from '../../Features/countUpdate';
+import { incrementByAmount } from '../../Features/countUpdate'
+import { setEducationValue } from '../../Features/sectionCUpdate'
+
 const pointsJson = require('../../points.json')
 
-const LESS_THAN_SECONDARY_SCHOOL = "Less than secondary school (high school)";
-const SECONDARY_DIPLOMA = "Secondary diploma (high school graduation)";
-const ONE_YEAR_DEGREE = "One-year degree, diploma or certificate";
-const TWO_YEAR_PROGRAM = "Two-year program";
-const BACHELORS_DEGREE = "Bachelor's degree OR a 3+ year program";
-const TWO_OR_MORE_CERTIFICATES = "Two or more certificates, diplomas, or degrees";
-const MASTERS_DEGREE = "Master's degree OR professional degree (licensed profession)";
-const DOCTORAL_LEVEL = "Doctoral level university degree (Ph.D.)";
+const LESS_THAN_SECONDARY_SCHOOL = "Less than secondary school (high school)"
+const SECONDARY_DIPLOMA = "Secondary diploma (high school graduation)"
+const ONE_YEAR_DEGREE = "One-year degree, diploma or certificate"
+const TWO_YEAR_PROGRAM = "Two-year program"
+const BACHELORS_DEGREE = "Bachelor's degree OR a 3+ year program"
+const TWO_OR_MORE_CERTIFICATES = "Two or more certificates, diplomas, or degrees"
+const MASTERS_DEGREE = "Master's degree OR professional degree (licensed profession)"
+const DOCTORAL_LEVEL = "Doctoral level university degree (Ph.D.)"
 
 function Education(props) {
 
@@ -49,6 +51,12 @@ function Education(props) {
     }
     setOldEducationValue(newEducationValue)
     dispatch(incrementByAmount(pointsToAdd))
+  }, [newEducationValue])
+
+  useEffect(() => {
+    if (isPrincipal && newEducationValue) {
+      dispatch(setEducationValue(newEducationValue))
+    }
   }, [newEducationValue])
 
   useEffect(() => {

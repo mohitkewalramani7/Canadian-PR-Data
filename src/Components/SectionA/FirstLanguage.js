@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl"
+import InputLabel from "@material-ui/core/InputLabel"
+import MenuItem from "@material-ui/core/MenuItem"
+import Select from "@material-ui/core/Select"
 
 import { incrementByAmount } from '../../Features/countUpdate'
+import { setFirstLanguageValue } from '../../Features/sectionCUpdate'
 const pointsJson = require('../../points.json')
 
 const LESS_THAN_CLB_4 = "Less than CLB 4";
@@ -38,6 +39,12 @@ function FirstLanguage(props) {
     }
     setOldFirstLanguageSelection(newFirstLanguageSelection)
     dispatch(incrementByAmount(pointsToAdd))
+  }, [newFirstLanguageSelection])
+
+  useEffect(() => {
+    if (newFirstLanguageSelection) {
+      dispatch(setFirstLanguageValue(newFirstLanguageSelection))
+    }
   }, [newFirstLanguageSelection])
 
   useEffect(() => {

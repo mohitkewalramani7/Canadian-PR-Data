@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react"
+import { useSelector } from 'react-redux'
 import * as d3 from "d3"
 
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
-import SectionA from "./SectionA/SectionA";
-import SectionB from "./SectionB/SectionB";
-import SectionC from "./SectionC/SectionC";
-import SectionD from "./SectionD/SectionD";
+import SectionA from "./SectionA/SectionA"
+import SectionB from "./SectionB/SectionB"
+import SectionC from "./SectionC/SectionC"
+import SectionD from "./SectionD/SectionD"
 
 import points_distribution from "../points_distribution.json"
 
@@ -180,7 +180,7 @@ function Main(props) {
               style={{ width: '100%' }}>
               {showHistogram ?
                 'Hide Cumulative Frequency Diagram' :
-                'Show Cumulative Frequency Diagram'
+                'Show Cumulative Frequency Diagram (2021 September)'
               }
             </Button>
           </div>

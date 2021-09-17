@@ -12,13 +12,12 @@ function ForeignWorkExperience(props) {
         <FormControl variant="outlined" className="inputFields">
           <InputLabel>Select One</InputLabel>
           <Select
-            value=''
             label="Education"
+            onChange={(_, child) => props.onChange(child.props.id) }
           >
-            <MenuItem id="dropdownOptionWrap" value="" />
-            <MenuItem id="dropdownOptionWrap" value={1}>No foreign work experience</MenuItem>
-            <MenuItem id="dropdownOptionWrap" value={2}>1 or 2 years of foreign work experience</MenuItem>
-            <MenuItem id="dropdownOptionWrap" value={3}>3 years or more of foreign work experience</MenuItem>
+            <MenuItem id="none" value={0}>No foreign work experience</MenuItem>
+            <MenuItem id="one_or_two" value={1}>1 or 2 years of foreign work experience</MenuItem>
+            <MenuItem id="three_or_more" value={2}>3 years or more of foreign work experience</MenuItem>
           </Select>
         </FormControl>
       </div>

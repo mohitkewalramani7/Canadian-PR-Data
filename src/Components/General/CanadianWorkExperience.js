@@ -7,6 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
 import { incrementByAmount } from '../../Features/countUpdate'
+import { setCanadianWorkExperienceValue } from '../../Features/sectionCUpdate';
 const pointsJson = require('../../points.json')
 
 const NONE_OR_LESS_THAN_A_YEAR = "None or less than a year";
@@ -45,6 +46,12 @@ function CanadianWorkExperience(props) {
     }
     setOldExperience(newExperience)
     dispatch(incrementByAmount(pointsToAdd))
+  }, [newExperience])
+
+  useEffect(() => {
+    if (isPrincipal && newExperience) {
+      dispatch(setCanadianWorkExperienceValue(newExperience))
+    }
   }, [newExperience])
 
   useEffect(() => {

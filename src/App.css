@@ -38,3 +38,7 @@
 #dropdownOptionWrap {
   white-space: normal;
 }
+
+#sectionCPointsText {
+  color: red;
+}
